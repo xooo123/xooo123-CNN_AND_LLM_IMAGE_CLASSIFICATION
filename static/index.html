@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ray Analysis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="dashboard-container">
+        
+        <header class="dashboard-header">
+            <h1>X-ray Analysis Dashboard</h1>
+            <div class="controls-group">
+                <label for="imageInput" class="custom-file-upload">
+                    Upload New X-ray
+                </label>
+                <input type="file" id="imageInput" accept="image/*">
+                <button id="predictBtn">Run Analysis</button>
+            </div>
+        </header>
+
+        <section class="image-panel card">
+            <div class="image-preview-box">
+                <img id="xrayImagePreview" src="" alt="X-ray preview will appear here" />
+                <span id="previewPlaceholder">Please select an X-ray image</span>
+            </div>
+            <span id="fileName">No file selected</span>
+        </section>
+
+        <div id="result" class="info-panels hidden">
+
+            <section class="results-panel card">
+                <h2>Prediction Results</h2>
+                <div class="prediction-chart-container">
+                    <div class="prediction-chart" role="progressbar" aria-valuenow="0">
+                        <div class="chart-inner">
+                            <strong id="chart-score">--%</strong>
+                            <span id="chart-label">N/A</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul id="allScores">
+                    </ul>
+
+                <p class="hidden"><strong>Label:</strong> <span id="label"></span></p>
+                <p class="hidden"><strong>Score:</strong> <span id="score"></span></p>
+            </section>
+
+            <section class="llm-panel card">
+                <h2>LLM Explanation</h2>
+                <p id="explanation">Awaiting analysis...</p>
+            </section>
+
+            <section class="history-panel card">
+                <h2>Patient History & Trends</h2>
+                <div class="chart-placeholder">
+                    <p>Lung Opacity Score Over Time</p>
+                    <svg width="100%" height="80" viewBox="0 0 200 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 60L20 55L40 65L60 50L80 45L100 50L120 40L140 35L160 45L180 30L200 35" stroke="#4a5568" stroke-width="2"/>
+                        <path d="M0 60L20 55L40 65L60 50L80 45L100 50L120 40L140 35L160 45L180 30L200 35" stroke="#22d3ee" stroke-opacity="0.5" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Previous Reports</h3>
+                <ul class="previous-reports">
+                    <li>2023-11-01: Report.pdf</li>
+                    <li>2023-09-15: Report.pdf</li>
+                </ul>
+            </section>
+
+        </div>
+        
+        <div id="loading" class="loading-indicator hidden">
+            <div class="spinner"></div>
+            <p>Loading prediction, please wait...</p>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

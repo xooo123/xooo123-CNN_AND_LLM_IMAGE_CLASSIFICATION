@@ -1,0 +1,329 @@
+/* --- Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* --- Root Variables (Colors) --- */
+:root {
+    --bg-dark-primary: #0b172a;  /* Deep dark blue */
+    --bg-dark-secondary: #1d2a40; /* Lighter card background */
+    --border-dark: #334155;     /* Subtle border */
+    --text-primary: #e2e8f0;    /* Light grey (almost white) */
+    --text-secondary: #94a3b8;  /* Muted grey */
+    --accent-blue: #3b82f6;     /* Bright blue for upload */
+    --accent-teal: #14b8a6;     /* Teal for analysis */
+    --accent-teal-dark: #0f766e;
+    --accent-chart: #22d3ee;    /* Bright cyan for chart */
+}
+
+/* --- General Body and Layout --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-dark-primary);
+    color: var(--text-primary);
+    margin: 0;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* 1.5 parts for image, 1 part for info */
+    grid-template-rows: auto 1fr;      /* Auto row for header, rest for content */
+    grid-template-areas:
+        "header header"
+        "image info";
+    gap: 24px;
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+}
+
+.card {
+    background: var(--bg-dark-secondary);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* --- Header & Controls --- */
+.dashboard-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-dark);
+    padding-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin: 0;
+}
+
+.controls-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload,
+#predictBtn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.custom-file-upload {
+    background-color: var(--accent-blue);
+    color: white;
+}
+.custom-file-upload:hover {
+    background-color: #2563eb;
+}
+
+#predictBtn {
+    background-color: var(--accent-teal);
+    color: white;
+}
+#predictBtn:hover {
+    background-color: var(--accent-teal-dark);
+}
+
+/* --- Image Panel (Left) --- */
+.image-panel {
+    grid-area: image;
+    display: flex;
+    flex-direction: column;
+    height: fit-content; /* Stop it from stretching too tall */
+}
+
+.image-preview-box {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Makes the box square */
+    background: #000;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#xrayImagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 'contain' fits the whole image */
+    display: none; /* Hidden until an image is loaded */
+}
+
+#previewPlaceholder {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Show image and hide placeholder when image has src */
+#xrayImagePreview[src]:not([src=""]) {
+    display: block;
+}
+#xrayImagePreview[src]:not([src=""]) + #previewPlaceholder {
+    display: none;
+}
+
+#fileName {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+/* --- Info Panels (Right) --- */
+.info-panels {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info-panels h2 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+/* --- Loading Spinner --- */
+.loading-indicator {
+    grid-area: info; /* Sits in the same spot as info panels */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary);
+    min-height: 300px;
+}
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--border-dark);
+    border-top-color: var(--accent-chart);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Card 1: Prediction Results --- */
+.prediction-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.prediction-chart {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: var(--bg-dark-primary); /* Fallback */
+    /* Conic gradient will be set by JS */
+}
+
+.chart-inner {
+    width: 130px;
+    height: 130px;
+    background: var(--bg-dark-secondary);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-inner #chart-score {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent-chart);
+}
+.chart-inner #chart-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: -5px;
+}
+
+#allScores {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#allScores li {
+    display: grid;
+    grid-template-columns: 1fr 2fr 50px; /* Label | Bar | Percent */
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+#allScores .label {
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#allScores .percentage {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+}
+
+.bar-container {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-dark-primary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background-color: var(--accent-blue);
+    border-radius: 4px;
+    transition: width 0.3s ease-out;
+}
+
+/* --- Card 2: LLM Explanation --- */
+#explanation {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    background: var(--bg-dark-primary);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0;
+    border-left: 4px solid var(--accent-teal);
+    font-style: normal;
+}
+
+/* --- Card 3: Patient History --- */
+.history-panel h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.chart-placeholder {
+    background: var(--bg-dark-primary);
+    border-radius: 8px;
+    padding: 16px;
+}
+.chart-placeholder p {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.previous-reports {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.previous-reports li {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-dark);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.previous-reports li:last-child {
+    border-bottom: none;
+}

@@ -1,0 +1,25 @@
+# === Ignore virtual environments ===
+venv/
+.env/
+*/venv/
+*/.env/
+
+# === Ignore Python cache ===
+__pycache__/
+*.pyc
+
+# === Ignore Jupyter Notebook checkpoints ===
+.ipynb_checkpoints/
+
+# === Ignore datasets ===
+Covid19-dataset/
+data/
+datasets/
+*.csv
+*.tsv
+*.json
+*.zip
+
+# === Ignore OS/system files ===
+.DS_Store
+Thumbs.db
