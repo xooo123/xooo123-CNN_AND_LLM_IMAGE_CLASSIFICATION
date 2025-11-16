@@ -127,8 +127,15 @@ cnn_project/
   pip install -r requirements.txt
    ```
 ### Training:
+ **Hyperparameters Used in the Report**
+ ```# Runs used in the report:
+python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 123 
+python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42
+python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 35  --seed 77   
 ```
-  python src/train.py
+**best parameters result**
+```
+ python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42  
 ```
     This script will: Load dataset , Train the CNN and Save best weights to:
     ```
@@ -136,7 +143,7 @@ cnn_project/
       ```
 ### 3  Evaluation
 ```
-  python src/eval.py
+  python src/eval.py --data_root ./Covid19-dataset --checkpoint ./checkpoints/last.pth --out_dir ./results --batch_size 16 --image_size 224       
 ```
 **this where will the Output be saved**
 ```
