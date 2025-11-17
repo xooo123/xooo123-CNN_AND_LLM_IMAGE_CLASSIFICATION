@@ -108,19 +108,20 @@ cnn_project/
 ## Installation
 
 ### 1️ Create virtual environment
-
+**on git bash**
   ```sh
-  python -m venv venv
+python -m venv venv
 ```
   Activate it:
   
    Windows
    ```
-      venv\Scripts\activate
+source venv/Scripts/activate
+
 ```
   ### macOS/Linux
   ```
-  source venv/bin/activate
+source venv/bin/activate
 ```
 ### 2 Install dependencies
    ```
