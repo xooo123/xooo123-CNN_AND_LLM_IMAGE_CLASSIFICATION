@@ -130,13 +130,15 @@ source venv/bin/activate
 ### Training:
  **Hyperparameters Used in the Report**
  ```# Runs used in the report:
-python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 123 
-python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42
-python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 35  --seed 77   
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4 --batch_size 32 --epochs 30 --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 77
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 30  --seed 77
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 50  --seed 42
 ```
 **best parameters result**
 ```
- python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42  
+ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42  
 ```
     This script will: Load dataset , Train the CNN and Save best weights to:
     ```
@@ -154,17 +156,15 @@ python train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epoch
   **Run prediction:**
        **Shows predicted label + probability distribution**
   ```
-    python src/inference.py --image path/to/image.jpg
+    python src/inference.py --image Covid19-dataset/test/Covid/096.png --checkpoint ./checkpoints/best.pth
 ```
 ### 5 LLM Explanations
 ```
-  python llm_client.py \
-    --image path/to/image.jpg \
-    --prediction COVID19   #Generate an explanation using the trained model output
+   python llm_client.py --image Covid19-dataset/test/Covid/096.png --prediction Covid --backend openai
 ```
 ### 6 FastAPI Server:
 ```
-  uvicorn model_server:app --host 0.0.0.0 --port=8000 --reload #starting server
+ uvicorn model_server:app --reload  
 ```
  ### opening the website via:
 ```
