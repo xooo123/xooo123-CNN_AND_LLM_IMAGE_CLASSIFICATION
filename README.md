@@ -159,24 +159,25 @@ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --e
     python src/inference.py --image Covid19-dataset/test/Covid/096.png --checkpoint ./checkpoints/best.pth
 ```
 ### 5 setting up the enviroment for LLM explanations
-**1 install ollama**
+**5.1 install ollama**
 ```
 pip install openai ollama
 ```
-**2 get API key from openai website**
+**5.2 get API key from openai website**
 ```
 https://platform.openai.com/
 ```
-**2.1 create an API key by going to Quickstart section and select ### create API key**
-  **2.2 go to llm_client.py, find this section of the code and add your openai key save and run**
+**5.2.1 create an API key by going to Quickstart section and select ### create API key**
+
+  **5.2.2 go to llm_client.py, find this section of the code and add your openai key save and run**
   ```
    api_key = os.environ.get("OPENAI_API_KEY") #add your openai key here
   ```
-### 5 LLM Explanations
+### 6 LLM Explanations
 ```
   python llm_client.py --image Covid19-dataset/test/Covid/096.png --prediction Covid
 ```
-### 6 FastAPI Server:
+### 7 FastAPI Server:
 ```
  uvicorn model_server:app --reload  
 ```
