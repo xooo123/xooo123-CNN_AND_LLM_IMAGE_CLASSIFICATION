@@ -1,8 +1,8 @@
 import torch, os, json
 from PIL import Image
 from torchvision import transforms
-from src.model import SimpleCNN
-from src.llm_wrapper import explain_prediction
+from model import SimpleCNN
+from llm_wrapper import explain_prediction
 
 def load_image(path, image_size=224):
     img = Image.open(path).convert('RGB')
