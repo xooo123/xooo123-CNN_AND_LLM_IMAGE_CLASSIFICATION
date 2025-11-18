@@ -23,7 +23,7 @@ Write a concise (3–6 sentence) explanation describing:
     # ----------------------------------------
     # 1) TRY OPENAI FIRST
     # ----------------------------------------
-    openai_key = os.environ.get("OPENAI_API_KEY")
+    openai_key = ("OPENAI_API_KEY")
 
     if openai_key:  # Only attempt if key actually set
         try:
