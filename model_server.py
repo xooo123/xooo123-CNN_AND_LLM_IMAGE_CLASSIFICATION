@@ -12,6 +12,7 @@ import torch
 import torch.nn.functional as F
 from torchvision import transforms
 from PIL import Image
+import time
 
 # Import the CNN model and LLM wrapper
 from src.model import SimpleCNN
@@ -90,22 +91,42 @@ def health():
 async def predict(
     file: Optional[UploadFile] = File(None),
     image_url: Optional[str] = Query(None),
-    use_llm: bool = Form(False),  # <-- change here
+    use_llm: bool = Form(False),
     x_api_key: str = Header(...)
 ):
     if x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Invalid API Key")
 
-    # Load image
+    # Load or download image
     try:
         if file:
             content = await file.read()
+
+            # ---- FIX START ----
+            # Save uploaded file to disk
+            os.makedirs("uploads", exist_ok=True)
+            save_path = f"uploads/{int(time.time())}_{file.filename}"
+            with open(save_path, "wb") as f_out:
+                f_out.write(content)
+            image_path = save_path  # <-- send REAL PATH to LLM
+            # ---- FIX END ----
+
         elif image_url:
             r = requests.get(image_url, timeout=10)
             r.raise_for_status()
             content = r.content
+
+            # Save downloaded image to disk
+            os.makedirs("uploads", exist_ok=True)
+            ext = image_url.split("?")[0].split(".")[-1]
+            save_path = f"uploads/{int(time.time())}_remote.{ext}"
+            with open(save_path, "wb") as f_out:
+                f_out.write(content)
+            image_path = save_path
+
         else:
             raise HTTPException(status_code=400, detail="Provide file or image_url")
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Could not read image: {e}")
 
@@ -130,13 +151,17 @@ async def predict(
     # LLM explanation
     if use_llm:
         try:
-            image_hint = image_url if image_url else "<uploaded image>"
-            explanation = explain_prediction(image_hint, label, response["all_scores"])
+            explanation = explain_prediction(
+                image_path=image_path,      # <-- SEND REAL SAVED FILE PATH
+                predicted_label=label,
+                probs=response["all_scores"]
+            )
             response["explanation"] = explanation
         except Exception as e:
             response["explanation"] = f"(LLM explanation failed: {e})"
 
     return response
+
 
 # ---------------------------
 # Mount static files (MUST be LAST)
