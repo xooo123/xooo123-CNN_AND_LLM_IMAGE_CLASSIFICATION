@@ -8,9 +8,5 @@ torchsummary
 tqdm
 scikit-learn
 seaborn
-<<<<<<< HEAD
 openai>=1.6.0
 requests
-=======
-openai>=1.6.0
->>>>>>> 77d4ed7bcc857a54469ae6584467da0edc937892
