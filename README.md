@@ -1,3 +1,8 @@
+# covid19-classification-cnn-mllm
+A CNN-MLLM hybrid framework for classifying and explaining covid19 medical images
+=======
+# CNN_AND_LLM_IMAGE_CLASSIFICATION                                                                                                                                                                                 
+=======
 #  CNN + LLM COVID-19 X-Ray Classifier
 A hybrid **Convolutional Neural Network** + **Multimodal Large Language Model (MLLM)** system for classifying and explaining **COVID-19 chest X-ray images**.
 
@@ -130,6 +135,7 @@ source venv/bin/activate
 ### Training:
  **Hyperparameters Used in the Report**
  ```# Runs used in the report:
+<<<<<<< HEAD
 python src/train.py --data_root ./Covid19-dataset --lr 2e-4 --batch_size 32 --epochs 30 --seed 42
 python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42
 python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 77
@@ -139,6 +145,15 @@ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --e
 **best parameters result**
 ```
  python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42  
+=======
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 123 
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 35  --seed 77   
+```
+**best parameters result**
+```
+ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42  
+>>>>>>> 77d4ed7bcc857a54469ae6584467da0edc937892
 ```
     This script will: Load dataset , Train the CNN and Save best weights to:
     ```
@@ -174,3 +189,4 @@ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --e
 
 ### License
 MIT License — free for research, academic, and commercial use.
+>>>>>>> 7d0e8da323da5e9d0cdc80a9dd2bad034ed7dccc
