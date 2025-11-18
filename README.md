@@ -160,7 +160,7 @@ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --e
 ```
 ### 5 LLM Explanations
 ```
-   python llm_client.py --image Covid19-dataset/test/Covid/096.png --prediction Covid --backend openai
+  python llm_client.py --image Covid19-dataset/test/Covid/096.png --prediction Covid
 ```
 ### 6 FastAPI Server:
 ```
