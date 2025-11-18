@@ -55,7 +55,7 @@ def get_openai_explanation(image_path, prediction):
         print("   pip install openai")
         sys.exit(1)
 
-    api_key = os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get("OPENAI_API_KEY") #add your openai key here
     if not api_key:
         print("❌ OPENAI_API_KEY not found. Please set your environment variable.")
         sys.exit(1)
