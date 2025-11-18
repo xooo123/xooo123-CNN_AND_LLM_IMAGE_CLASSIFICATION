@@ -12,3 +12,5 @@ openai>=1.6.0
 requests
 fastapi
 ollama
+uvicorn
+python-multipart
