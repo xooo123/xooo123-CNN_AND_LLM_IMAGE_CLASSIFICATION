@@ -2,7 +2,6 @@ import os
 import json
 import base64
 import requests
-import inference
 # ============================================================
 # MAIN REASONING FUNCTION
 # ============================================================
