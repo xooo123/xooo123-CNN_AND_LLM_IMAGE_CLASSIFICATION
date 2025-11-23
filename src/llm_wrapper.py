@@ -141,7 +141,8 @@ def _ollama_llava_explanation(image_path, prompt):
 # ============================================================
 def _template(predicted_label, probs):
     return (
-        f"The CNN predicted '{predicted_label}' with probabilities {probs}. "
-        "Due to system errors, the LLM reasoning module could not be used. "
-        "This explanation is automatically generated and is not medically reliable."
+        f"The model predicts '{predicted_label}' with probabilities {probs}. "
+    "This prediction is based on learned radiographic patterns such as opacities or consolidation. "
+    "This explanation is automatically generated for educational use only — clinical confirmation, "
+    "PCR testing, and expert radiologist evaluation are always required."
     )
