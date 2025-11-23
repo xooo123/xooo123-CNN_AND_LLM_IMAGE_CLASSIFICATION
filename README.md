@@ -130,15 +130,15 @@ source venv/bin/activate
 ### Training:
  **Hyperparameters Used in the Report**
  ```# Runs used in the report:
-python src/train.py --data_root ./Covid19-dataset --lr 2e-4 --batch_size 32 --epochs 30 --seed 42
-python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42
-python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 77
-python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 30  --seed 77
-python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 50  --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4 --batch_size 16 --epochs 30 --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 35  --seed 42
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 35  --seed 77
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 77
+python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 50  --seed 42
 ```
 **best parameters result**
 ```
- python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 32 --epochs 35  --seed 42  
+ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --epochs 30  --seed 42  
 
 ```
     This script will: Load dataset , Train the CNN and Save best weights to:
@@ -170,14 +170,14 @@ https://platform.openai.com/
   ```
    api_key = ("OPENAI_API_KEY") #add your openai key here
   ```
-**5.1.3start ollama**
+**5.1.3 start ollama**
 ```
 ollama serve
 ```
 
 ### 6 LLM Explanations
 ```
-  python llm_client.py --image Covid19-dataset/test/Covid/096.png --prediction Covid
+ python llm_client.py  --image Covid19-dataset/test/Covid/096.png --predicted_label Covid  --probs 0.9276,0.0323,0.0400 --class_names Covid,Normal,Viral-Pneumonia
 ```
 ### 7 FastAPI Server:
 ```
@@ -187,7 +187,9 @@ ollama serve
 ```
  http://localhost:8000
 ```
+###Note
 
+**Keep in mind that openai might not work due to key issues and ollama is the local LLM in this project**
 
 ### License
 MIT License — free for research, academic, and commercial use.
