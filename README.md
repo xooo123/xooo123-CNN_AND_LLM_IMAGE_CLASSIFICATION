@@ -112,17 +112,6 @@ cnn_project/
   ```sh
 python -m venv venv
 ```
-  Activate it:
-  
-   Windows
-   ```
-source venv/Scripts/activate
-
-```
-  ### macOS/Linux
-  ```
-source venv/bin/activate
-```
 ### 2 Install dependencies
    ```
   pip install -r requirements.txt
@@ -153,33 +142,22 @@ python src/train.py --data_root ./Covid19-dataset --lr 2e-4  --batch_size 16 --e
 ```
     results/
 ```
-### 4 Inference
-  **Run prediction:**
-       **Shows predicted label + probability distribution**
-  ```
-    python src/inference.py --image Covid19-dataset/test/Covid/096.png --checkpoint ./checkpoints/best.pth
-```
-### 5 setting up the enviroment for LLM explanations
-**5.1 get API key from openai website**
+### 4 setting up the enviroment for LLM explanations
+**4.1 get API key from openai website**
 ```
 https://platform.openai.com/
 ```
-**5.1.1 create an API key by going to Quickstart section and select ### create API key**
+**4.1.1 create an API key by going to Quickstart section and select ### create API key**
 
-  **5.1.2 go to llm_client.py and llm_wrapper.py , find this section of the code and add your openai key save and run**
+  **4.1.2 go to llm_client.py and llm_wrapper.py , find this section of the code and add your openai key save and run**
   ```
    api_key = ("OPENAI_API_KEY") #add your openai key here
   ```
-**5.1.3 start ollama**
+**4.1.3 start ollama**
 ```
 ollama serve
 ```
-
-### 6 LLM Explanations
-```
- python llm_client.py  --image Covid19-dataset/test/Covid/096.png --predicted_label Covid  --probs 0.9276,0.0323,0.0400 --class_names Covid,Normal,Viral-Pneumonia
-```
-### 7 FastAPI Server:
+### 5 FastAPI Server:
 ```
  uvicorn model_server:app --reload  
 ```
