@@ -112,6 +112,17 @@ cnn_project/
   ```sh
 python -m venv venv
 ```
+ Activate it:
+  
+  Windows
+   ```
+venv/Scripts/activate
+
+```
+### macOS/Linux
+  ```
+source venv/bin/activate
+```
 ### 2 Install dependencies
    ```
   pip install -r requirements.txt
