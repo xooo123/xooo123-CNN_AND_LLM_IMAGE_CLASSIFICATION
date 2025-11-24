@@ -120,7 +120,7 @@ def _ollama_llava_explanation(image_path, prompt):
         "http://localhost:11434/api/generate",
         stream=True,
         json=payload,
-        timeout=90
+        timeout=120
     )
 
     explanation = ""
