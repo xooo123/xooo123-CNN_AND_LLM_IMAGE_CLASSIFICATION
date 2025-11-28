@@ -178,6 +178,22 @@ ollama serve
 ```
 ###Note
 
+## ✅ Unit Tests
+
+This project includes automated unit tests using **pytest** to verify:
+
+- CNN forward pass correctness
+- Output class dimensions
+- Numerical stability (no NaNs)
+- FastAPI server health endpoint
+- LLM explanation fallback logic
+
+To run all tests:
+
+```bash
+python -m pytest
+```
+
 **Keep in mind that openai might not work due to key issues and ollama is the local LLM in this project**
 
 ### License
