@@ -195,6 +195,7 @@ python -m pytest
 ```
 
 **Keep in mind that openai might not work due to key issues and ollama is the local LLM in this project**
+
 **Github Link**
 ```
 https://github.com/xooo123/CNN_AND_LLM_IMAGE_CLASSIFICATION
